@@ -3,17 +3,29 @@ import './todolist.scss';
 import { Button } from 'react-bootstrap';
 import { IoIosClose } from 'react-icons/io';
 
+// cookie
+import Cookies from 'universal-cookie';
+import { useCookies } from "react-cookie";
+
+
+const getCookieTodolist = () => {
+    return[];
+}
+
 const ToDoList = () => {
 
-    const [todolist, setTodolist] = useState([]);
+    const [todolist, setTodolist] = useState(getCookieTodolist);
     // { id: Math.random(), listItem: ''}
     const [newInputValue, setNewInputValue] = useState('');
+
 
 
     const handleSave = () => {
         if( document.getElementById('newinput').value == ''){
             alert("Please enter an item");
         } else {
+        // cookie
+        document.cookie = "lastListValue = " +  newInputValue + "; expires = Thu, 18 Dec 2030 12:00:00 UTC";
         // saving tada into todolist
         setTodolist( [...todolist, {id:Math.random(), listItem:newInputValue}] );
         // reset the value of input
@@ -47,6 +59,7 @@ const ToDoList = () => {
     return (
         <div className="todolist">
             <h1>To Do List</h1>
+            {/* {Cookies.user && <p>{Cookies.user}</p>} */}
             <p>Please add your items</p>
             <section>
 
