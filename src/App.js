@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.scss';
+import 'bootstrap/dist/css/bootstrap.min.css';
 // components
 import ToDoList from './components/todolist.js';
 
