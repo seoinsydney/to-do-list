@@ -10,7 +10,7 @@ const ToDoList = () => {
     const [newInputValue, setNewInputValue] = useState('');
 
 
-    const addToDoList = () => {
+    const handleSave = () => {
         if( document.getElementById('newinput').value == ''){
             alert("Please enter an item");
         } else {
@@ -23,6 +23,11 @@ const ToDoList = () => {
         }
     }
 
+
+    const addToDoList = () => {
+        handleSave();
+    }
+
     const onChangeItemList = (e) => {
         // state variable is getting the data from input when I change the input
         setNewInputValue(e.target.value);
@@ -31,6 +36,12 @@ const ToDoList = () => {
     const deleteItemList = (deleteItemId) => {
         console.log("you deleted:" + deleteItemId);
         setTodolist(todolist.filter(item => item.id !== deleteItemId));
+    }
+    const handleKeyPress = (press) => {
+        if( press.key === 'Enter'){
+            console.log('you pressed Enter key!');
+            handleSave();
+        }
     }
 
     return (
@@ -42,12 +53,13 @@ const ToDoList = () => {
                 <input id="newinput" type="text" 
                 placeholder="add item.."
                 onChange={onChangeItemList}
+                onKeyPress={handleKeyPress}
                 ></input>
 
                 <Button 
                     variant="dark"
                     type="button"
-                    onClick={ () => addToDoList() }
+                    onClick={ () => addToDoList()  }
                 >Add list</Button>
             </section>
 
